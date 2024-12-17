@@ -34,3 +34,9 @@ class UpdateMhsViewModel(
         }
     }
 
+    fun updateState(mahasiswaEvent: MahasiswaEvent) {
+        updateUIState = updateUIState.copy(
+            mahasiswaEvent = mahasiswaEvent,
+        )
+    }
+
