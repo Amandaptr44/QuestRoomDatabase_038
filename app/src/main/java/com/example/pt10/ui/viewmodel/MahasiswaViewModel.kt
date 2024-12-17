@@ -70,48 +70,5 @@ class MahasiswaViewModel(
     }
 }
 
-data class MhsUIState(
-    val mahasiswaEvent: MahasiswaEvent = MahasiswaEvent(),
-    val isEntryValid: FormErrorState = FormErrorState(),
-    val snackbarMessage: String? = null,
-)
 
-data class FormErrorState(
-    val nim : String? = null,
-    val nama : String? = null,
-    val jenisKelamin : String? = null,
-    val alamat : String? = null,
-    val kelas : String? = null,
-    val angkatan: String? = null
-){
-    fun isValid(): Boolean{
-        return nim == null
-                && nama == null
-                && jenisKelamin == null
-                && alamat == null
-                && kelas == null
-                && angkatan == null
-    }
-}
-
-//data class variabel yang menyimpan
-//data input form
-data class MahasiswaEvent(
-    val nim : String = "",
-    val nama : String = "",
-    val jenisKelamin : String = "",
-    val alamat : String = "",
-    val kelas : String = "",
-    val angkatan: String = ""
-)
-
-//Menyimpan input form ked dalam entity
-fun MahasiswaEvent.toMahasiswaEntity(): Mahasiswa = Mahasiswa(
-    nim = nim,
-    nama = nama,
-    jeniskelamin = jenisKelamin,
-    alamat = alamat,
-    kelas = kelas,
-    angkatan = angkatan
-)
 
