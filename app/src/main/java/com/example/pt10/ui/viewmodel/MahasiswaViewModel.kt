@@ -70,5 +70,9 @@ class MahasiswaViewModel(
     }
 }
 
-
+data class MhsUIState(
+    val mahasiswaEvent: MahasiswaEvent = MahasiswaEvent(),
+    val isEntryValid: FormErrorState = FormErrorState(),
+    val snackbarMessage: String? = null,
+)
 
