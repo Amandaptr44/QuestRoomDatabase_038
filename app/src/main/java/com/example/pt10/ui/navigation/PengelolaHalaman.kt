@@ -53,3 +53,28 @@ fun PengelolaHalaman(
             )
         }
 
+        composable(
+            DestinasiDetail.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiDetail.NIM){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            val nim = it.arguments?.getString(DestinasiDetail.NIM)
+            nim?.let { nim ->
+                DetailMhsView(
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onEditClick = {
+                        navController.navigate("${DestinasiUpdate.route}/$it")
+                    },
+                    modifier = modifier,
+                    onDeleteClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+        }
+
