@@ -81,5 +81,8 @@ class UpdateMhsViewModel(
         }
     }
 
+    fun resetSnackBarMessage() {
+        updateUIState = updateUIState.copy(snackbarMessage = null)
+    }
 
 
