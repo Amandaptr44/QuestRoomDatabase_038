@@ -3,11 +3,16 @@ package com.example.pt10.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.praktikumpertemuan10.ui.view.mahasiswa.DestinasiInsert
 import com.example.praktikumpertemuan10.ui.view.mahasiswa.InserMhsView
+import com.example.pt10.ui.view.mahasiswa.DetailMhsView
+import com.example.pt10.ui.view.mahasiswa.HomeMhsView
+import com.example.pt10.ui.view.mahasiswa.UpdateMhsView
 
 @Composable
 fun PengelolaHalaman(
@@ -16,13 +21,4 @@ fun PengelolaHalaman(
 ){
     NavHost(
         navController = navController,
-        startDestination = DestinasiInsert.route) {
-        composable(
-            route = DestinasiInsert.route
-        ){
-            InserMhsView(
-                  onBack = { }, onNavigate = { }
-            )
-        }
-    }
-}
+        startDestination = DestinasiHome.route) {
