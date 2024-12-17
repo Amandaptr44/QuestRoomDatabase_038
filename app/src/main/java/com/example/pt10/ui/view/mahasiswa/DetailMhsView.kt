@@ -84,6 +84,106 @@ fun DetailMhsView(
     }
 }
 
+@Composable
+fun BodyDetailMhs(
+    modifier: Modifier = Modifier,
+    detailUiState: DetailUiState = DetailUiState(),
+    onDeleteClick: () -> Unit = { }
+){
+    var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
+    when {
+        detailUiState.isLoading -> {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator() //Tampilkan loading
+            }
+        }
+
+        detailUiState.isUiEventNotEmpty -> {
+            Column (
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ){
+                ItemDetailMhs(
+                    mahasiswa = detailUiState.detailUiEvent.toMahasiswaEntity(),
+                    modifier = Modifier
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Button(
+                    onClick = {
+                        deleteConfirmationRequired = true
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    Text(text = "Delete")
+                }
+                if (deleteConfirmationRequired){
+                    DeleteConfirmationDialog(
+                        onDeleteConfirm = {
+                            deleteConfirmationRequired = false
+                            onDeleteClick()
+                        },
+                        onDeleteCancel = {deleteConfirmationRequired = false},
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
+        }
+
+        detailUiState.isUiEventEmpty -> {
+            Box(
+                modifier = modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "Data tidak ditemukan",
+                    modifier.padding(16.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ItemDetailMhs(
+    modifier: Modifier = Modifier,
+    mahasiswa: Mahasiswa
+){
+    Card (
+        modifier = modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    ){
+        Column (
+            modifier = Modifier.padding(16.dp)
+        ){
+            ComponentDetailMhs(judul = "NIM", isinya = mahasiswa.nim)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMhs(judul = "Nama", isinya = mahasiswa.nama)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMhs(judul = "Alamat", isinya = mahasiswa.alamat)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMhs(judul = "Jenis Kelamin", isinya = mahasiswa.jeniskelamin)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMhs(judul = "Kelas", isinya = mahasiswa.kelas)
+            Spacer(modifier = Modifier.padding(4.dp))
+
+            ComponentDetailMhs(judul = "Angkatan", isinya = mahasiswa.angkatan)
+            Spacer(modifier = Modifier.padding(4.dp))
+        }
+    }
+}
+
 
 
 
