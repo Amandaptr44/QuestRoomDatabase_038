@@ -39,3 +39,17 @@ fun PengelolaHalaman(
             )
         }
 
+        composable(
+            route = DestinasiInsert.route
+        ){
+            InserMhsView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier,
+            )
+        }
+
